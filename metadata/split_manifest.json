@@ -1,0 +1,37 @@
+{
+  "generated_at_utc": "2026-07-14T14:15:37.945910+00:00",
+  "source_project": "data_classification_experiment_socc",
+  "split_relationship": {
+    "full_rows": 5500,
+    "tune_rows": 3850,
+    "test_rows": 1650,
+    "note": "The tune and test CSVs are the fixed split of the full semi-synthetic offline experiment dataset."
+  },
+  "files": {
+    "processed_data/accident_capsule_dataset_full.csv": {
+      "rows": 5500,
+      "columns": 75,
+      "size_bytes": 3526658,
+      "sha256": "5479f67184b6f24a84fc6d5809aac057460f1ee3f3db5894ca194e5cffc4c133"
+    },
+    "processed_data/accident_capsule_tune.csv": {
+      "rows": 3850,
+      "columns": 75,
+      "size_bytes": 2468873,
+      "sha256": "868285d64f6c0e4a095b17fd66467c88a89b0926e4a4615f3345b20334a3fa15"
+    },
+    "processed_data/accident_capsule_test.csv": {
+      "rows": 1650,
+      "columns": 75,
+      "size_bytes": 1059462,
+      "sha256": "0509b3007d5c84309c75f5c3c53b1bae7310276f6dc6932112b548c5127698f1"
+    },
+    "processed_data/accident_capsule_classified_test_final.csv": {
+      "rows": 1650,
+      "columns": 95,
+      "size_bytes": 1243407,
+      "sha256": "7123a38e8d15ddb81034572cea908c695705db60d3e365f6140cb4eabab3cc66"
+    }
+  },
+  "label_caveat": "base_manual_label, access_ptf_reference_level, and required_auth_manual_label are rule/policy-reference labels, not independent human annotations."
+}

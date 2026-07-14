@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it using the metadata below and cite the official UK STATS19 source."
+title: "Semi-synthetic STATS19 Data Capsule Classification Dataset"
+authors:
+  - family-names: "TBD"
+    given-names: "Project Author"
+version: "1.0.0"
+date-released: "2026-07-14"
+abstract: "A semi-synthetic offline vehicle-accident data classification and authentication-decision dataset constructed from UK STATS19 2024 road-safety open data."
+keywords:
+  - STATS19
+  - data classification
+  - authentication policy
+  - semi-synthetic dataset
+  - vehicle accident data
+license: "TBD"
+repository-code: "TBD"
