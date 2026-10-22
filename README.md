@@ -61,3 +61,27 @@ See:
 - `metadata/sha256_manifest.csv`
 - `metadata/source_attribution.md`
 - `docs/dataset_card.md`
+
+
+## Reproducing Authentication Decisions
+
+This incremental material covers the frozen data-sensitivity grading, adaptive-authentication decisions and policy-relative ablation experiments. It preserves the original 5,500 requests and fixed 3,850/1,650 split, reuses the existing processed_data/ files, and adds only the missing refined-test intermediate required for comparison.
+
+- Configuration and exact rules: `reproducibility/policy_config.json`.
+- All 27 condition combinations: `reproducibility/full_policy_mapping.csv`.
+- Detailed rules, environment and outputs: `reproducibility/README.md`.
+- Scope: `docs/reproduction_scope.md`.
+
+From the repository root (Python 3.10+, standard library only):
+
+```sh
+python -B reproducibility/reproduce_decisions.py
+python -B reproducibility/reproduce_ablations.py
+python -B reproducibility/verify_results.py
+```
+
+The independently checked historical references are Full Basic/Medium/Strong=365/721/564, Base-only=652/548/450, 390 upgrades (276 Basic->Medium, 11 Basic->Strong, 103 Medium->Strong), 188 weakenings without PTFa, and 67 weakenings/22 strengthenings without output scope. The final outputs are comparison targets, not inputs to the policy calculation.
+
+Historical aggregate/masked_record/raw_evidence explicitly map to summary_view/masked_record/raw_record. Full is the original conditional aggregator; the no-scope variant uses max(Base,PTFa). That fallback explains the 22 Low-Base/High-PTFa/summary-view reverse upgrades.
+
+Figure-7 weighted-cost claims and L_req(Q_t) coverage are outside this incremental acceptance scope and have not been independently validated here. This update makes no claim to reproduce all TEE, ZKP, blockchain or system-performance experiments. Excluded evidence is recorded as NOT_VERIFIABLE, not PASS. The existing license and citation metadata remain unchanged and need the author's manual confirmation where provisional.
