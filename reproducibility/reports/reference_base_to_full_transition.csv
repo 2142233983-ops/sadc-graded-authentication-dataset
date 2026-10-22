@@ -1,0 +1,10 @@
+﻿from_level,to_level,count
+low,low,365
+low,medium,276
+low,high,11
+medium,low,0
+medium,medium,445
+medium,high,103
+high,low,0
+high,medium,0
+high,high,450

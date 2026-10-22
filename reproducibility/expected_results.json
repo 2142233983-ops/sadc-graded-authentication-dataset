@@ -1,0 +1,115 @@
+{
+  "test_rows": 1650,
+  "full_rows": 5500,
+  "tune_rows": 3850,
+  "distributions": {
+    "Full": {
+      "basic": 365,
+      "medium": 721,
+      "strong": 564
+    },
+    "Base_only": {
+      "basic": 652,
+      "medium": 548,
+      "strong": 450
+    }
+  },
+  "base_to_full_changes": {
+    "upgraded": 390,
+    "downgraded": 0,
+    "unchanged": 1260
+  },
+  "base_to_full_transition": [
+    {
+      "from_level": "low",
+      "to_level": "low",
+      "count": 365
+    },
+    {
+      "from_level": "low",
+      "to_level": "medium",
+      "count": 276
+    },
+    {
+      "from_level": "low",
+      "to_level": "high",
+      "count": 11
+    },
+    {
+      "from_level": "medium",
+      "to_level": "low",
+      "count": 0
+    },
+    {
+      "from_level": "medium",
+      "to_level": "medium",
+      "count": 445
+    },
+    {
+      "from_level": "medium",
+      "to_level": "high",
+      "count": 103
+    },
+    {
+      "from_level": "high",
+      "to_level": "low",
+      "count": 0
+    },
+    {
+      "from_level": "high",
+      "to_level": "medium",
+      "count": 0
+    },
+    {
+      "from_level": "high",
+      "to_level": "high",
+      "count": 450
+    }
+  ],
+  "ablations": {
+    "w/o L_ptfa": {
+      "weaker_than_full": 188,
+      "stronger_than_full": 0
+    },
+    "w/o L_out": {
+      "weaker_than_full": 67,
+      "stronger_than_full": 22
+    }
+  },
+  "reverse_scope_upgrades": 22,
+  "monotonicity_violations": {
+    "base": 1,
+    "ptfa": 0,
+    "output_risk": 0
+  },
+  "parameter_reference": {
+    "sensitivity_weights": {
+      "A": 0.225,
+      "Iv": 0.2,
+      "Ha": 0.4,
+      "Rl_content": 0.175
+    },
+    "sensitivity_thresholds": {
+      "low": 0.3,
+      "high": 0.775
+    },
+    "ptfa_weights": {
+      "role_claim": 0.15,
+      "relation_claim": 0.2,
+      "qualification_claim": 0.2,
+      "regulator_claim": 0.35,
+      "court_claim": 0.35
+    },
+    "ptfa_thresholds": {
+      "low": 0.25,
+      "high": 0.45
+    }
+  },
+  "note": "Historical acceptance references only. The policy engine does not read these values to compute decisions.",
+  "sources": [
+    "outputs/socc_phase2_base_only_control_run1/base_only_vs_full_mode_distribution.csv",
+    "outputs/socc_phase2_base_only_control_run1/base_only_vs_full_delta_summary.csv",
+    "outputs/socc_phase2_base_only_control_run1/base_to_full_transition_matrix.csv",
+    "outputs/socc_phase2_policy_ablation_run1/policy_ablation_summary.csv"
+  ]
+}

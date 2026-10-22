@@ -1,0 +1,32 @@
+{
+  "description": "Standalone PTFa V2 parameters optimized on tune set for access_ptf_reference_level. This does not replace refined_best_params.json unless manually adopted.",
+  "ptfa_params": {
+    "ptf_w_role": 0.15,
+    "ptf_w_relation": 0.2,
+    "ptf_w_qualification": 0.2,
+    "ptf_w_regulator": 0.35,
+    "ptf_w_court": 0.35,
+    "ptf_low_threshold": 0.25,
+    "ptf_high_threshold": 0.45
+  },
+  "tune_ptfa_result": {
+    "accuracy": 0.9047,
+    "macro_f1": 0.9142,
+    "high_recall": 1.0,
+    "downgrade_error": 0.0,
+    "total_downgrade_error": 0.0953,
+    "medium_to_low_count": 367,
+    "high_to_medium_count": 0,
+    "high_to_low_count": 0,
+    "objective_score": 9.4724
+  },
+  "tune_auth_result_after_ptfa_v2": {
+    "accuracy": 0.9961,
+    "macro_f1": 0.9956,
+    "high_recall": 1.0,
+    "downgrade_error": 0.0,
+    "medium_to_low_count": 15,
+    "high_to_medium_count": 0,
+    "high_to_low_count": 0
+  }
+}

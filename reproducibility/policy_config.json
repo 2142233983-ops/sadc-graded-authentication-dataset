@@ -1,0 +1,1073 @@
+{
+  "config_version": "after_07d-frozen-public-1",
+  "sensitivity_weights": {
+    "A": 0.225,
+    "Iv": 0.2,
+    "Ha": 0.4,
+    "Rl_content": 0.175
+  },
+  "sensitivity_thresholds": {
+    "low": 0.3,
+    "high": 0.775
+  },
+  "high_sensitivity_override": {
+    "operation": "any_trigger_forces_high",
+    "conditions": [
+      {
+        "name": "fatal",
+        "when": {
+          "kind": "numeric_equals",
+          "field": "collision_severity",
+          "value": 1
+        },
+        "source_lines": "08:248"
+      },
+      {
+        "name": "raw_edr_flag",
+        "when": {
+          "kind": "numeric_equals",
+          "field": "content_has_raw_edr",
+          "value": 1
+        },
+        "source_lines": "08:250-251"
+      },
+      {
+        "name": "full_trip",
+        "when": {
+          "kind": "equals",
+          "field": "content_trajectory_granularity",
+          "value": "full_trip"
+        },
+        "source_lines": "08:253-254"
+      },
+      {
+        "name": "raw_edr_level",
+        "when": {
+          "kind": "in",
+          "field": "content_edr_data_level",
+          "values": [
+            "raw",
+            "raw_edr"
+          ]
+        },
+        "source_lines": "08:256-257"
+      },
+      {
+        "name": "raw_video",
+        "when": {
+          "kind": "equals",
+          "field": "content_video_data_level",
+          "value": "raw_video"
+        },
+        "source_lines": "08:259-260"
+      },
+      {
+        "name": "raw_radar",
+        "when": {
+          "kind": "equals",
+          "field": "content_radar_data_level",
+          "value": "raw_radar"
+        },
+        "source_lines": "08:262-263"
+      },
+      {
+        "name": "injury_detail",
+        "when": {
+          "kind": "equals",
+          "field": "content_injury_info_level",
+          "value": "injury_detail"
+        },
+        "source_lines": "08:265-266"
+      },
+      {
+        "name": "liability_detail",
+        "when": {
+          "kind": "equals",
+          "field": "content_liability_info_level",
+          "value": "liability_detail"
+        },
+        "source_lines": "08:268-269"
+      }
+    ]
+  },
+  "ptfa_weights": {
+    "role_claim": 0.15,
+    "relation_claim": 0.2,
+    "qualification_claim": 0.2,
+    "regulator_claim": 0.35,
+    "court_claim": 0.35
+  },
+  "ptfa_thresholds": {
+    "low": 0.25,
+    "high": 0.45
+  },
+  "ptfa_score_rule": "min(1.0, sum(weight * factor)); no normalization by the weight sum",
+  "output_scope_aliases": {
+    "aggregate": "summary_view",
+    "masked_record": "masked_record",
+    "raw_evidence": "raw_record",
+    "summary_view": "summary_view",
+    "raw_record": "raw_record"
+  },
+  "historical_scopes": [
+    "aggregate",
+    "masked_record",
+    "raw_evidence"
+  ],
+  "output_scope_semantics": {
+    "summary_view": "Historical aggregate: summary/statistical output category; no executable output projection is implemented in this classifier.",
+    "masked_record": "Record-level masked-output category used by the conditional decision policy; actual masking is outside this package.",
+    "raw_record": "Historical raw_evidence: raw/evidence record access category; not a numeric level-3 hard floor by itself."
+  },
+  "conditional_aggregation_rules": {
+    "default": "medium",
+    "evaluation": "ordered assignments, preserving original branch order",
+    "ordered_assignments": [
+      {
+        "when": {
+          "kind": "equals",
+          "field": "base",
+          "value": "high"
+        },
+        "level": "high",
+        "source_lines": "08b:229-230"
+      },
+      {
+        "when": {
+          "kind": "all",
+          "items": [
+            {
+              "kind": "equals",
+              "field": "base",
+              "value": "medium"
+            },
+            {
+              "kind": "equals",
+              "field": "scope",
+              "value": "raw_record"
+            }
+          ]
+        },
+        "level": "high",
+        "source_lines": "08b:234-235"
+      },
+      {
+        "when": {
+          "kind": "all",
+          "items": [
+            {
+              "kind": "equals",
+              "field": "base",
+              "value": "medium"
+            },
+            {
+              "kind": "not",
+              "item": {
+                "kind": "equals",
+                "field": "scope",
+                "value": "raw_record"
+              }
+            }
+          ]
+        },
+        "level": "medium",
+        "source_lines": "08b:237-238"
+      },
+      {
+        "when": {
+          "kind": "all",
+          "items": [
+            {
+              "kind": "equals",
+              "field": "base",
+              "value": "low"
+            },
+            {
+              "kind": "equals",
+              "field": "ptfa",
+              "value": "low"
+            },
+            {
+              "kind": "equals",
+              "field": "scope",
+              "value": "summary_view"
+            }
+          ]
+        },
+        "level": "low",
+        "source_lines": "08b:240-241"
+      },
+      {
+        "when": {
+          "kind": "all",
+          "items": [
+            {
+              "kind": "equals",
+              "field": "base",
+              "value": "low"
+            },
+            {
+              "kind": "equals",
+              "field": "ptfa",
+              "value": "low"
+            },
+            {
+              "kind": "in",
+              "field": "scope",
+              "values": [
+                "masked_record",
+                "raw_record"
+              ]
+            }
+          ]
+        },
+        "level": "medium",
+        "source_lines": "08b:243-248"
+      },
+      {
+        "when": {
+          "kind": "all",
+          "items": [
+            {
+              "kind": "equals",
+              "field": "base",
+              "value": "low"
+            },
+            {
+              "kind": "equals",
+              "field": "ptfa",
+              "value": "medium"
+            }
+          ]
+        },
+        "level": "medium",
+        "source_lines": "08b:250-251"
+      },
+      {
+        "when": {
+          "kind": "all",
+          "items": [
+            {
+              "kind": "equals",
+              "field": "base",
+              "value": "low"
+            },
+            {
+              "kind": "equals",
+              "field": "ptfa",
+              "value": "high"
+            },
+            {
+              "kind": "equals",
+              "field": "scope",
+              "value": "summary_view"
+            }
+          ]
+        },
+        "level": "medium",
+        "source_lines": "08b:253-254"
+      },
+      {
+        "when": {
+          "kind": "all",
+          "items": [
+            {
+              "kind": "equals",
+              "field": "base",
+              "value": "low"
+            },
+            {
+              "kind": "equals",
+              "field": "ptfa",
+              "value": "high"
+            },
+            {
+              "kind": "in",
+              "field": "scope",
+              "values": [
+                "masked_record",
+                "raw_record"
+              ]
+            }
+          ]
+        },
+        "level": "high",
+        "source_lines": "08b:256-261"
+      }
+    ]
+  },
+  "level_to_proof_mode": {
+    "low": "basic",
+    "medium": "medium",
+    "high": "strong"
+  },
+  "base_only_rule": {
+    "operation": "identity_base_level",
+    "note": "Use base level after the historical high floor, without task or scope aggregation."
+  },
+  "without_ptfa_rule": {
+    "default": "medium",
+    "ordered_assignments": [
+      {
+        "when": {
+          "kind": "equals",
+          "field": "base",
+          "value": "high"
+        },
+        "level": "high",
+        "source_lines": "22:188"
+      },
+      {
+        "when": {
+          "kind": "all",
+          "items": [
+            {
+              "kind": "equals",
+              "field": "base",
+              "value": "medium"
+            },
+            {
+              "kind": "equals",
+              "field": "scope",
+              "value": "raw_record"
+            }
+          ]
+        },
+        "level": "high",
+        "source_lines": "22:189"
+      },
+      {
+        "when": {
+          "kind": "all",
+          "items": [
+            {
+              "kind": "equals",
+              "field": "base",
+              "value": "medium"
+            },
+            {
+              "kind": "not",
+              "item": {
+                "kind": "equals",
+                "field": "scope",
+                "value": "raw_record"
+              }
+            }
+          ]
+        },
+        "level": "medium",
+        "source_lines": "22:190"
+      },
+      {
+        "when": {
+          "kind": "all",
+          "items": [
+            {
+              "kind": "equals",
+              "field": "base",
+              "value": "low"
+            },
+            {
+              "kind": "equals",
+              "field": "scope",
+              "value": "summary_view"
+            }
+          ]
+        },
+        "level": "low",
+        "source_lines": "22:191"
+      },
+      {
+        "when": {
+          "kind": "all",
+          "items": [
+            {
+              "kind": "equals",
+              "field": "base",
+              "value": "low"
+            },
+            {
+              "kind": "in",
+              "field": "scope",
+              "values": [
+                "masked_record",
+                "raw_record"
+              ]
+            }
+          ]
+        },
+        "level": "medium",
+        "source_lines": "22:192"
+      }
+    ]
+  },
+  "without_output_scope_rule": {
+    "operation": "max_base_ptfa",
+    "inputs": [
+      "base",
+      "ptfa"
+    ],
+    "source_lines": "22:196-205",
+    "note": "Not Agg with L_out set to 1; scope is not read."
+  },
+  "fixed_strong_rule": {
+    "level": "high",
+    "proof_mode": "strong",
+    "source_lines": "26:233-249"
+  },
+  "level_numeric_mapping": {
+    "none": 0.0,
+    "low": 0.25,
+    "medium": 0.5,
+    "high": 0.75,
+    "raw": 1.0,
+    "full": 1.0,
+    "summary": 0.5,
+    "hashed": 0.5,
+    "did": 1.0,
+    "single_point": 0.75,
+    "region": 0.25,
+    "accident_window": 0.75,
+    "full_trip": 1.0,
+    "raw_edr": 1.0,
+    "event_summary": 0.5,
+    "raw_video": 1.0,
+    "raw_radar": 1.0,
+    "injury_summary": 0.75,
+    "injury_detail": 1.0,
+    "liability_summary": 0.75,
+    "liability_detail": 1.0,
+    "policy_hash": 0.5,
+    "policy_relation": 0.75,
+    "claim_range": 0.5,
+    "claim_exact": 0.75
+  },
+  "severity_mapping": {
+    "1": 1.0,
+    "2": 0.75,
+    "3": 0.25
+  },
+  "severity_default": 0.25,
+  "sensitivity_components": {
+    "A": {
+      "severity": true,
+      "mapped_fields": [
+        "content_injury_info_level",
+        "content_liability_info_level",
+        "content_edr_data_level",
+        "content_video_data_level",
+        "content_radar_data_level"
+      ]
+    },
+    "Iv": {
+      "mapped_fields": [
+        "content_driver_identity_level",
+        "content_vehicle_identity_level",
+        "content_policy_info_level",
+        "content_location_granularity",
+        "content_trajectory_granularity"
+      ],
+      "flags": [
+        {
+          "field": "content_has_driver_did",
+          "equals": 1,
+          "score": 1.0
+        },
+        {
+          "field": "content_has_vehicle_did",
+          "equals": 1,
+          "score": 1.0
+        }
+      ]
+    },
+    "Ha": {
+      "severity": true,
+      "mapped_fields": [
+        "content_injury_info_level",
+        "content_liability_info_level",
+        "content_claim_amount_level",
+        "content_trajectory_granularity",
+        "content_edr_data_level",
+        "content_video_data_level",
+        "content_radar_data_level"
+      ]
+    },
+    "Rl_content": {
+      "severity": true,
+      "mapped_fields": [
+        "content_liability_info_level",
+        "content_injury_info_level"
+      ],
+      "flags": [
+        {
+          "field": "did_police_officer_attend_scene_of_accident",
+          "equals": 1,
+          "score": 0.75
+        },
+        {
+          "field": "content_has_raw_edr",
+          "equals": 1,
+          "score": 1.0
+        },
+        {
+          "field": "content_has_camera_video",
+          "equals": 1,
+          "score": 0.75
+        },
+        {
+          "field": "content_has_radar_data",
+          "equals": 1,
+          "score": 0.75
+        }
+      ]
+    }
+  },
+  "ptfa_text_inputs": {
+    "allowed_roles": "access_allowed_roles",
+    "required_claims": "access_required_claims",
+    "usage_purpose": "access_usage_purpose",
+    "task_type": "access_task_type"
+  },
+  "ptfa_join_order": [
+    "allowed_roles",
+    "required_claims",
+    "usage_purpose",
+    "task_type"
+  ],
+  "ptfa_activation_rules": [
+    {
+      "when": {
+        "kind": "contains_any",
+        "field": "all_text",
+        "keywords": [
+          "researcher",
+          "research_institution",
+          "insurance_company",
+          "repair_shop",
+          "vehicle_owner",
+          "platform_auditor",
+          "auditor",
+          "business_analyst",
+          "organization_identity",
+          "institution_identity",
+          "role_claim",
+          "研究机构",
+          "授权研究机构",
+          "保险公司",
+          "保险机构",
+          "维修机构",
+          "维修企业",
+          "车主",
+          "车辆所有者",
+          "平台审核员",
+          "审核员",
+          "业务分析员",
+          "机构身份",
+          "平台审核身份",
+          "角色证明",
+          "身份认证",
+          "身份声明"
+        ]
+      },
+      "then": [
+        {
+          "target": "role_claim",
+          "value": 0.5,
+          "source_line": 364
+        }
+      ],
+      "source_line": 329
+    },
+    {
+      "when": {
+        "kind": "contains_any",
+        "field": "all_text",
+        "keywords": [
+          "traffic_police",
+          "police",
+          "regulator",
+          "court",
+          "judicial_authority",
+          "law_enforcement",
+          "supervisor",
+          "交警",
+          "交通警察",
+          "执法",
+          "执法机构",
+          "监管",
+          "监管机构",
+          "法院",
+          "司法",
+          "司法机关",
+          "审计机关"
+        ]
+      },
+      "then": [
+        {
+          "target": "role_claim",
+          "value": 1.0,
+          "source_line": 392
+        }
+      ],
+      "source_line": 367
+    },
+    {
+      "when": {
+        "kind": "contains_any",
+        "field": "required_claims",
+        "keywords": [
+          "policy_relation",
+          "vehicle_owner_relation",
+          "accident_related_relation",
+          "case_relation",
+          "business_relation",
+          "claim_relation",
+          "relation_claim",
+          "保单关系",
+          "车辆关系",
+          "车主关系",
+          "事故关系",
+          "事故关联",
+          "案件关系",
+          "业务关系",
+          "理赔关系",
+          "关系证明"
+        ]
+      },
+      "then": [
+        {
+          "target": "relation_claim",
+          "value": 1.0,
+          "source_line": 422
+        }
+      ],
+      "source_line": 398,
+      "else": [
+        {
+          "when": {
+            "kind": "contains_any",
+            "field": "task_type",
+            "keywords": [
+              "claim_review",
+              "repair_assessment",
+              "accident_recheck",
+              "insurance_claim",
+              "case_review",
+              "理赔审核",
+              "维修评估",
+              "事故复核",
+              "保险理赔",
+              "案件复核"
+            ]
+          },
+          "then": [
+            {
+              "target": "relation_claim",
+              "value": 0.75,
+              "source_line": 440
+            }
+          ],
+          "source_line": 425
+        }
+      ]
+    },
+    {
+      "when": {
+        "kind": "contains_any",
+        "field": "usage_purpose",
+        "keywords": [
+          "claim",
+          "repair",
+          "case",
+          "事故复核",
+          "理赔",
+          "维修",
+          "案件"
+        ]
+      },
+      "then": [
+        {
+          "target": "relation_claim",
+          "value": 0.75,
+          "source_line": 455
+        }
+      ],
+      "source_line": 443
+    },
+    {
+      "when": {
+        "kind": "contains_any",
+        "field": "required_claims",
+        "keywords": [
+          "claim_adjuster_qualification",
+          "accident_investigator_qualification",
+          "judicial_appraisal_qualification",
+          "repair_assessment_qualification",
+          "research_approval",
+          "usage_approval",
+          "qualification_claim",
+          "理赔员资质",
+          "理赔审核资质",
+          "事故调查资质",
+          "事故鉴定资质",
+          "司法鉴定资质",
+          "维修评估资质",
+          "研究用途批准",
+          "用途批准",
+          "资质证明",
+          "资格证明"
+        ]
+      },
+      "then": [
+        {
+          "target": "qualification_claim",
+          "value": 1.0,
+          "source_line": 486
+        }
+      ],
+      "source_line": 461
+    },
+    {
+      "when": {
+        "kind": "contains_any",
+        "field": "usage_purpose",
+        "keywords": [
+          "claim",
+          "repair",
+          "investigation",
+          "audit",
+          "research",
+          "business_statistics",
+          "trend_research",
+          "analysis",
+          "理赔",
+          "维修",
+          "调查",
+          "审计",
+          "研究",
+          "趋势研究",
+          "脱敏事故趋势研究",
+          "事故业务统计",
+          "业务统计",
+          "统计分析",
+          "业务分析"
+        ]
+      },
+      "then": [
+        {
+          "target": "qualification_claim",
+          "value": 0.75,
+          "source_line": 516
+        }
+      ],
+      "source_line": 489
+    },
+    {
+      "when": {
+        "kind": "contains_any",
+        "field": "task_type",
+        "keywords": [
+          "research_analysis",
+          "business_analysis",
+          "claim_review",
+          "repair_assessment",
+          "accident_recheck",
+          "研究分析",
+          "业务分析",
+          "理赔审核",
+          "维修评估",
+          "事故复核"
+        ]
+      },
+      "then": [
+        {
+          "target": "qualification_claim",
+          "value": 0.75,
+          "source_line": 536
+        }
+      ],
+      "source_line": 518
+    },
+    {
+      "when": {
+        "kind": "numeric_equals",
+        "field": "access_law_enforcement_required",
+        "value": 1
+      },
+      "then": [
+        {
+          "target": "regulator_claim",
+          "value": 1.0,
+          "source_line": 542
+        }
+      ],
+      "source_line": 541
+    },
+    {
+      "when": {
+        "kind": "numeric_equals",
+        "field": "access_regulatory_audit",
+        "value": 1
+      },
+      "then": [
+        {
+          "target": "regulator_claim",
+          "value": 1.0,
+          "source_line": 545
+        }
+      ],
+      "source_line": 544
+    },
+    {
+      "when": {
+        "kind": "contains_any",
+        "field": "all_text",
+        "keywords": [
+          "traffic_police",
+          "police",
+          "regulator",
+          "regulatory_audit",
+          "law_enforcement",
+          "audit",
+          "supervision",
+          "regulator_claim",
+          "交警",
+          "交通警察",
+          "监管",
+          "监管审计",
+          "执法",
+          "执法调查",
+          "审计",
+          "监督",
+          "监管证明",
+          "执法证明"
+        ]
+      },
+      "then": [
+        {
+          "target": "regulator_claim",
+          "value": 0.75,
+          "source_line": 573
+        }
+      ],
+      "source_line": 547
+    },
+    {
+      "when": {
+        "kind": "contains_any",
+        "field": "task_type",
+        "keywords": [
+          "law_enforcement",
+          "regulatory_audit",
+          "执法调查",
+          "监管审计"
+        ]
+      },
+      "then": [
+        {
+          "target": "regulator_claim",
+          "value": 1.0,
+          "source_line": 584
+        }
+      ],
+      "source_line": 575
+    },
+    {
+      "when": {
+        "kind": "numeric_equals",
+        "field": "access_court_authorization_required",
+        "value": 1
+      },
+      "then": [
+        {
+          "target": "court_claim",
+          "value": 1.0,
+          "source_line": 590
+        }
+      ],
+      "source_line": 589
+    },
+    {
+      "when": {
+        "kind": "contains_any",
+        "field": "required_claims",
+        "keywords": [
+          "court_authorization",
+          "judicial_authorization",
+          "judicial_warrant",
+          "court_claim",
+          "法院授权",
+          "司法授权",
+          "司法许可",
+          "法院许可",
+          "法院授权证明",
+          "司法授权证明"
+        ]
+      },
+      "then": [
+        {
+          "target": "court_claim",
+          "value": 1.0,
+          "source_line": 610
+        }
+      ],
+      "source_line": 592
+    },
+    {
+      "when": {
+        "kind": "contains_any",
+        "field": "task_type",
+        "keywords": [
+          "judicial_investigation",
+          "raw_evidence_access",
+          "司法调查",
+          "原始证据访问"
+        ]
+      },
+      "then": [
+        {
+          "target": "court_claim",
+          "value": 0.75,
+          "source_line": 621
+        }
+      ],
+      "source_line": 612
+    }
+  ],
+  "ptfa_keyword_matching": "case-sensitive substring matching; preserve original independent if and relation if/elif branches",
+  "float_tolerance": 1e-12,
+  "predicate_floor": {
+    "status": "NOT_VERIFIABLE",
+    "reason": "Outside this incremental update scope; no L_req is assigned or validated."
+  },
+  "original_source_references": [
+    {
+      "file": "scripts/08_apply_refined_best_params.py",
+      "function": "safe_str",
+      "start_line": 57,
+      "end_line": 60,
+      "original_file_sha256": "7d8d559c703d879e473d8f9ce9f41bad9065d3c6e893bd2713ea0beee261755b"
+    },
+    {
+      "file": "scripts/08_apply_refined_best_params.py",
+      "function": "contains_any",
+      "start_line": 63,
+      "end_line": 65,
+      "original_file_sha256": "7d8d559c703d879e473d8f9ce9f41bad9065d3c6e893bd2713ea0beee261755b"
+    },
+    {
+      "file": "scripts/08_apply_refined_best_params.py",
+      "function": "level_to_numeric",
+      "start_line": 68,
+      "end_line": 104,
+      "original_file_sha256": "7d8d559c703d879e473d8f9ce9f41bad9065d3c6e893bd2713ea0beee261755b"
+    },
+    {
+      "file": "scripts/08_apply_refined_best_params.py",
+      "function": "compute_A",
+      "start_line": 143,
+      "end_line": 163,
+      "original_file_sha256": "7d8d559c703d879e473d8f9ce9f41bad9065d3c6e893bd2713ea0beee261755b"
+    },
+    {
+      "file": "scripts/08_apply_refined_best_params.py",
+      "function": "compute_Iv",
+      "start_line": 166,
+      "end_line": 181,
+      "original_file_sha256": "7d8d559c703d879e473d8f9ce9f41bad9065d3c6e893bd2713ea0beee261755b"
+    },
+    {
+      "file": "scripts/08_apply_refined_best_params.py",
+      "function": "compute_Ha",
+      "start_line": 184,
+      "end_line": 206,
+      "original_file_sha256": "7d8d559c703d879e473d8f9ce9f41bad9065d3c6e893bd2713ea0beee261755b"
+    },
+    {
+      "file": "scripts/08_apply_refined_best_params.py",
+      "function": "compute_Rl_content",
+      "start_line": 209,
+      "end_line": 238,
+      "original_file_sha256": "7d8d559c703d879e473d8f9ce9f41bad9065d3c6e893bd2713ea0beee261755b"
+    },
+    {
+      "file": "scripts/08_apply_refined_best_params.py",
+      "function": "get_high_floor_mask",
+      "start_line": 241,
+      "end_line": 271,
+      "original_file_sha256": "7d8d559c703d879e473d8f9ce9f41bad9065d3c6e893bd2713ea0beee261755b"
+    },
+    {
+      "file": "scripts/08_apply_refined_best_params.py",
+      "function": "compute_ptf_subfactors",
+      "start_line": 280,
+      "end_line": 629,
+      "original_file_sha256": "7d8d559c703d879e473d8f9ce9f41bad9065d3c6e893bd2713ea0beee261755b"
+    },
+    {
+      "file": "scripts/08b_apply_ptfa_v2_final_params.py",
+      "function": "ptfa_to_level",
+      "start_line": 203,
+      "end_line": 214,
+      "original_file_sha256": "5ae6426f810409b609791d30245bde3dbf89836215fb75ea2459388ffdc0fc24"
+    },
+    {
+      "file": "scripts/08b_apply_ptfa_v2_final_params.py",
+      "function": "compute_required_auth_level_vectorized",
+      "start_line": 217,
+      "end_line": 263,
+      "original_file_sha256": "5ae6426f810409b609791d30245bde3dbf89836215fb75ea2459388ffdc0fc24"
+    },
+    {
+      "file": "scripts/08b_apply_ptfa_v2_final_params.py",
+      "function": "proof_mode_from_auth",
+      "start_line": 266,
+      "end_line": 272,
+      "original_file_sha256": "5ae6426f810409b609791d30245bde3dbf89836215fb75ea2459388ffdc0fc24"
+    },
+    {
+      "file": "scripts/08b_apply_ptfa_v2_final_params.py",
+      "function": "apply_final_params",
+      "start_line": 279,
+      "end_line": 313,
+      "original_file_sha256": "5ae6426f810409b609791d30245bde3dbf89836215fb75ea2459388ffdc0fc24"
+    },
+    {
+      "file": "scripts/22_socc_phase2_policy_ablation.py",
+      "function": "policy_full",
+      "start_line": 171,
+      "end_line": 182,
+      "original_file_sha256": "3b244280e1b5d13932f71a0eef5207c1aa13163025aed9be370f7cb38495a267"
+    },
+    {
+      "file": "scripts/22_socc_phase2_policy_ablation.py",
+      "function": "policy_without_ptfa",
+      "start_line": 185,
+      "end_line": 193,
+      "original_file_sha256": "3b244280e1b5d13932f71a0eef5207c1aa13163025aed9be370f7cb38495a267"
+    },
+    {
+      "file": "scripts/22_socc_phase2_policy_ablation.py",
+      "function": "policy_without_output_scope",
+      "start_line": 196,
+      "end_line": 205,
+      "original_file_sha256": "3b244280e1b5d13932f71a0eef5207c1aa13163025aed9be370f7cb38495a267"
+    },
+    {
+      "file": "scripts/26_socc_phase2_base_only_control.py",
+      "function": "build_vm_counts",
+      "start_line": 233,
+      "end_line": 252,
+      "original_file_sha256": "39211191782b6f967ae908bf78b45ec25e3111d6cab7667fe2bcde016aa044cc"
+    }
+  ],
+  "input_files": {
+    "full": "processed_data/accident_capsule_dataset_full.csv",
+    "tune": "processed_data/accident_capsule_tune.csv",
+    "test": "processed_data/accident_capsule_test.csv",
+    "refined_test": "processed_data/accident_capsule_classified_test_refined.csv",
+    "final_test": "processed_data/accident_capsule_classified_test_final.csv"
+  },
+  "public_layout": "Existing repository root; processed_data reused without duplicates.",
+  "verification_scope": "Sensitivity grading, historical authentication decisions and policy ablations only."
+}

@@ -1,0 +1,2 @@
+# Python 3.10 or newer. Standard library only.
+# No third-party packages, pip downloads or installation steps are required.

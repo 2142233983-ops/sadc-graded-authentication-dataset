@@ -1,0 +1,95 @@
+{
+  "sources": [
+    {
+      "path": "outputs/refined_best_params.json",
+      "size_bytes": 1143,
+      "sha256": "c9df45b472f509432c7a87631a84a1a446f304883839085e6f2ffdc90c087680",
+      "modified_time_utc": "2026-05-06T12:15:52.769865+00:00"
+    },
+    {
+      "path": "outputs/ptfa_standalone_v2_best_params.json",
+      "size_bytes": 951,
+      "sha256": "36bb110e1ac2b6a201fc99a108564dc6257eec34a201a467871a9221ee3feac1",
+      "modified_time_utc": "2026-05-07T04:01:09.273835+00:00"
+    },
+    {
+      "path": "scripts/08_apply_refined_best_params.py",
+      "size_bytes": 36989,
+      "sha256": "7d8d559c703d879e473d8f9ce9f41bad9065d3c6e893bd2713ea0beee261755b",
+      "modified_time_utc": "2026-05-07T01:54:18.386573+00:00"
+    },
+    {
+      "path": "scripts/22_socc_phase2_policy_ablation.py",
+      "size_bytes": 27410,
+      "sha256": "3b244280e1b5d13932f71a0eef5207c1aa13163025aed9be370f7cb38495a267",
+      "modified_time_utc": "2026-06-20T08:23:39.339607+00:00"
+    },
+    {
+      "path": "scripts/08b_apply_ptfa_v2_final_params.py",
+      "size_bytes": 18802,
+      "sha256": "5ae6426f810409b609791d30245bde3dbf89836215fb75ea2459388ffdc0fc24",
+      "modified_time_utc": "2026-05-07T08:09:30.029201+00:00"
+    },
+    {
+      "path": "scripts/26_socc_phase2_base_only_control.py",
+      "size_bytes": 19036,
+      "sha256": "39211191782b6f967ae908bf78b45ec25e3111d6cab7667fe2bcde016aa044cc",
+      "modified_time_utc": "2026-06-27T06:57:02.832093+00:00"
+    },
+    {
+      "path": "processed_data/accident_capsule_dataset_full.csv",
+      "size_bytes": 3526658,
+      "sha256": "5479f67184b6f24a84fc6d5809aac057460f1ee3f3db5894ca194e5cffc4c133",
+      "modified_time_utc": "2026-05-05T09:33:20.550623+00:00"
+    },
+    {
+      "path": "processed_data/accident_capsule_tune.csv",
+      "size_bytes": 2468873,
+      "sha256": "868285d64f6c0e4a095b17fd66467c88a89b0926e4a4615f3345b20334a3fa15",
+      "modified_time_utc": "2026-05-05T09:33:20.638054+00:00"
+    },
+    {
+      "path": "processed_data/accident_capsule_test.csv",
+      "size_bytes": 1059462,
+      "sha256": "0509b3007d5c84309c75f5c3c53b1bae7310276f6dc6932112b548c5127698f1",
+      "modified_time_utc": "2026-05-05T09:33:20.677974+00:00"
+    },
+    {
+      "path": "processed_data/accident_capsule_classified_test_refined.csv",
+      "size_bytes": 1207955,
+      "sha256": "c3464d4363293cc744fc82b88fbddb7b4828b33cb1bb8f1c8961657b78032e69",
+      "modified_time_utc": "2026-05-07T01:54:35.820480+00:00"
+    },
+    {
+      "path": "processed_data/accident_capsule_classified_test_final.csv",
+      "size_bytes": 1243407,
+      "sha256": "7123a38e8d15ddb81034572cea908c695705db60d3e365f6140cb4eabab3cc66",
+      "modified_time_utc": "2026-05-07T08:09:37.069666+00:00"
+    },
+    {
+      "path": "outputs/socc_phase2_base_only_control_run1/base_only_vs_full_mode_distribution.csv",
+      "size_bytes": 1158,
+      "sha256": "39cfa549a1efcca7a05f3dd9172a4bb5d8cc118570a2944f626cea6d0c4b5cf7",
+      "modified_time_utc": "2026-06-27T06:57:19.237425+00:00"
+    },
+    {
+      "path": "outputs/socc_phase2_base_only_control_run1/base_only_vs_full_delta_summary.csv",
+      "size_bytes": 368,
+      "sha256": "2e9f473674f2cac681c7733b7fa67cf66fae1bc235e8394389e43867b8aa5620",
+      "modified_time_utc": "2026-06-27T06:57:19.238417+00:00"
+    },
+    {
+      "path": "outputs/socc_phase2_base_only_control_run1/base_to_full_transition_matrix.csv",
+      "size_bytes": 91,
+      "sha256": "9ae5009fa9fc95349178d94e3318d428c2e99bfb48d92f1a18c929ede5660486",
+      "modified_time_utc": "2026-06-27T06:57:19.237922+00:00"
+    },
+    {
+      "path": "outputs/socc_phase2_policy_ablation_run1/policy_ablation_summary.csv",
+      "size_bytes": 1153,
+      "sha256": "7dd670b8c0e614a2cd8e4ac8a27fd107af354478a87343062d25aef9d54d617a",
+      "modified_time_utc": "2026-06-20T08:23:54.576897+00:00"
+    }
+  ],
+  "note": "Relative original paths; source hashes record provenance. No original absolute paths or private logs are copied."
+}

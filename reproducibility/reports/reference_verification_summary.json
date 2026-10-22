@@ -1,0 +1,224 @@
+{
+  "status": "PASS",
+  "release_status": "NEEDS_AUTHOR_REVIEW",
+  "scope": "Frozen offline historical decision-policy reproduction only.",
+  "complete_paper_evidence": "OUTSIDE_THIS_UPDATE_SCOPE",
+  "offline_decision_acceptance": "PASS",
+  "counts": {
+    "PASS": 18,
+    "FAIL": 0,
+    "NOT_VERIFIABLE": 6
+  },
+  "checks": [
+    {
+      "check": "frozen_hashes_and_configuration",
+      "status": "PASS",
+      "details": "All input SHA-256/size checks and schema/weight/threshold checks passed."
+    },
+    {
+      "check": "parameter_source_values",
+      "status": "PASS",
+      "details": "Configuration compared with the unmodified source parameter JSON values recorded independently."
+    },
+    {
+      "check": "original_parameter_json_agreement",
+      "status": "PASS",
+      "details": "Final PTFa uses V2 values, not the earlier refined PTFa block."
+    },
+    {
+      "check": "complete_27_mapping",
+      "status": "PASS",
+      "details": "Every enumerated legal type combination is checked against the source-derived reference mapping."
+    },
+    {
+      "check": "scope_alias_equivalence",
+      "status": "PASS",
+      "details": "Both names tested for every base/PTFa combination; unknown names are rejected."
+    },
+    {
+      "check": "unknown_scope_rejected",
+      "status": "PASS",
+      "details": "The valid domain is explicit, not the historical unknown-value fallback."
+    },
+    {
+      "check": "base_dominance",
+      "status": "PASS",
+      "details": "Agg(a,b,c)>=a for all 27 combinations."
+    },
+    {
+      "check": "known_mathematical_properties",
+      "status": "PASS",
+      "details": {
+        "observed_violations": {
+          "base": 1,
+          "ptfa": 0,
+          "output_risk": 0
+        },
+        "note": "Base monotonicity is known to fail; this check preserves that fact rather than claiming monotonicity."
+      }
+    },
+    {
+      "check": "threshold_boundaries",
+      "status": "PASS",
+      "details": "Strict low comparison and inclusive high comparison."
+    },
+    {
+      "check": "fixed_split",
+      "status": "PASS",
+      "details": "Full/tune/test identifiers, disjointness, row content and preserved split markers."
+    },
+    {
+      "check": "row_level_decisions_and_claims",
+      "status": "PASS",
+      "details": {
+        "rows": 1650,
+        "difference_cells": 0,
+        "tolerance": 1e-12
+      }
+    },
+    {
+      "check": "comparison_detects_reference_error",
+      "status": "PASS",
+      "details": "An in-memory incorrect reference is detected; no frozen input is changed."
+    },
+    {
+      "check": "proof_mode_distributions",
+      "status": "PASS",
+      "details": {
+        "Full": {
+          "basic": 365,
+          "medium": 721,
+          "strong": 564
+        },
+        "Base_only": {
+          "basic": 652,
+          "medium": 548,
+          "strong": 450
+        }
+      }
+    },
+    {
+      "check": "base_to_full_changes",
+      "status": "PASS",
+      "details": {
+        "upgraded": 390,
+        "downgraded": 0,
+        "unchanged": 1260
+      }
+    },
+    {
+      "check": "base_to_full_transition_matrix",
+      "status": "PASS",
+      "details": [
+        {
+          "from_level": "low",
+          "to_level": "low",
+          "count": 365
+        },
+        {
+          "from_level": "low",
+          "to_level": "medium",
+          "count": 276
+        },
+        {
+          "from_level": "low",
+          "to_level": "high",
+          "count": 11
+        },
+        {
+          "from_level": "medium",
+          "to_level": "low",
+          "count": 0
+        },
+        {
+          "from_level": "medium",
+          "to_level": "medium",
+          "count": 445
+        },
+        {
+          "from_level": "medium",
+          "to_level": "high",
+          "count": 103
+        },
+        {
+          "from_level": "high",
+          "to_level": "low",
+          "count": 0
+        },
+        {
+          "from_level": "high",
+          "to_level": "medium",
+          "count": 0
+        },
+        {
+          "from_level": "high",
+          "to_level": "high",
+          "count": 450
+        }
+      ]
+    },
+    {
+      "check": "ablation_w/o L_ptfa",
+      "status": "PASS",
+      "details": {
+        "weaker_than_full": 188,
+        "stronger_than_full": 0
+      }
+    },
+    {
+      "check": "ablation_w/o L_out",
+      "status": "PASS",
+      "details": {
+        "weaker_than_full": 67,
+        "stronger_than_full": 22
+      }
+    },
+    {
+      "check": "reverse_scope_upgrade_conditions",
+      "status": "PASS",
+      "details": {
+        "count": 22,
+        "all_low_high_summary_medium_to_high": true,
+        "task_counts": {
+          "law_enforcement_review": 22
+        }
+      }
+    },
+    {
+      "check": "weighted_constraint_reduction",
+      "status": "NOT_VERIFIABLE",
+      "acceptance_scope": "excluded",
+      "details": "Excluded from this decision-policy update; not independently validated here."
+    },
+    {
+      "check": "weighted_proof_cost_reduction",
+      "status": "NOT_VERIFIABLE",
+      "acceptance_scope": "excluded",
+      "details": "Excluded from this decision-policy update; not independently validated here."
+    },
+    {
+      "check": "weighted_bundle_size_reduction",
+      "status": "NOT_VERIFIABLE",
+      "acceptance_scope": "excluded",
+      "details": "Excluded from this decision-policy update; not independently validated here."
+    },
+    {
+      "check": "predicate_floor_coverage",
+      "status": "NOT_VERIFIABLE",
+      "acceptance_scope": "excluded",
+      "details": "Excluded from this decision-policy update; no per-request L_req is assigned."
+    },
+    {
+      "check": "citation_author_confirmation",
+      "status": "NOT_VERIFIABLE",
+      "acceptance_scope": "manual_publication_review",
+      "details": "PUBLICATION_BLOCKER: the existing CITATION.cff is preserved; author and release metadata require manual confirmation."
+    },
+    {
+      "check": "license_and_source_rights_confirmation",
+      "status": "NOT_VERIFIABLE",
+      "acceptance_scope": "manual_publication_review",
+      "details": "PUBLICATION_BLOCKER: the existing LICENSE is preserved; derived-data/code/source-excerpt redistribution rights require manual confirmation."
+    }
+  ]
+}

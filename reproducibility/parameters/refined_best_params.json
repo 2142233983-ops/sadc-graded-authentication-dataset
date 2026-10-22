@@ -1,0 +1,40 @@
+{
+  "description": "Refined best parameters selected on tune set. Final performance must be evaluated on test set.",
+  "base_params": {
+    "w_A": 0.225,
+    "w_Iv": 0.2,
+    "w_Ha": 0.4,
+    "w_Rl": 0.175,
+    "base_low_threshold": 0.3,
+    "base_high_threshold": 0.775
+  },
+  "ptfa_params": {
+    "ptf_w_role": 0.15,
+    "ptf_w_relation": 0.2,
+    "ptf_w_qualification": 0.2,
+    "ptf_w_regulator": 0.3,
+    "ptf_w_court": 0.35,
+    "ptf_low_threshold": 0.2,
+    "ptf_high_threshold": 0.5
+  },
+  "tune_result": {
+    "base_accuracy": 0.9725,
+    "base_macro_f1": 0.9747,
+    "base_high_recall": 1.0,
+    "base_downgrade_error": 0.0,
+    "base_medium_to_low_count": 106,
+    "base_medium_to_high_count": 0,
+    "auth_accuracy": 1.0,
+    "auth_macro_f1": 1.0,
+    "auth_high_recall": 1.0,
+    "auth_downgrade_error": 0.0,
+    "auth_medium_to_low_count": 0,
+    "auth_medium_to_high_count": 0,
+    "auth_high_to_low_count": 0,
+    "auth_high_to_medium_count": 0,
+    "strong_ratio": 0.3462,
+    "base_objective_score": 7.8416,
+    "auth_objective_score": 9.0,
+    "combined_objective_score": 16.8416
+  }
+}
